@@ -1,0 +1,18 @@
+name: build
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  linux64:
+    runs-on: ubuntu-latest
+    steps:
+       - uses: actions/checkout@v5
+       - name: build and test
+         shell: bash
+         run: ./build x86_64-linux-musl baseline
+       - uses: actions/cache@v4
+         with:
+           path: ./out/build-llvm-host
+           key: universal
+         
