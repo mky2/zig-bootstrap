@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
        - uses: actions/checkout@v5
+       - uses: actions/cache@v4
+         with:
+           path: ./out/build-llvm-host
+           key: universal
        - name: build and test
          shell: bash
          run: |
            export CMAKE_GENERATOR=Ninja
            ./build x86_64-linux-musl baseline
-       - uses: actions/cache@v4
-         with:
-           path: ./out/build-llvm-host
-           key: universal
          
